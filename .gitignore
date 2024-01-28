@@ -1,0 +1,11 @@
+/.gradle
+/.idea
+/.temp
+*.iml
+app/build
+beacon/build\
+beacon/release/
+/build
+local\.properties
+\.DS_Store
+*.exe
