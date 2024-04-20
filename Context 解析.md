@@ -1,13 +1,6 @@
-## sdk开发遇到问题汇总
-### 1. ArkTS:ERROR Failed to get an resolved OhmUrl by filepath
-#### 因为在hsp的ts代码中import c++代码路径不正确导致
-在hsp中，包含了 c++ 和 ts 代码，ts 引用 c++ 代码时，必须是以 so 名称引入，而不能直接以 c++ 所在文件路径引入，
-否则就会报错。
-```java
-import { sub, add } from '../../cpp/types/libqimei' // error
-import { sub, add } from 'libqimei.so'  // correct
-```
-### 2. Stage模式和FA模式下获取Context
+## Context 解析
+
+### Stage模式和FA模式下获取Context
 #### FA 模式
 Context模块提供了ability或application的上下文的能力，包括允许访问特定于应用程序的资源、请求和验证权限等。获取context方式如下代码所示：
 ```ts
@@ -69,4 +62,13 @@ struct Index {
     // ...
   }
 }
+```
+
+在 ets 文件（非页面）中获取 Contex
+```ts
+    // getContext 获取的是当前 hap 的，一个app 可能存在多个 hap，取决于当前执行逻辑在哪个 hap 里 
+    let context = getContext();
+
+    // applicationContext 只有一个
+    let appContext = getContext().getApplicationContext();
 ```
