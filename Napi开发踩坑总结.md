@@ -1,4 +1,4 @@
-### cmake 配置的一些细节差异
+## cmake 配置的一些细节差异
 
 #### set 文件路径
 ``` ts
@@ -21,4 +21,17 @@ set(SRC_UTIL
     ${util_src_dir}/log.cpp
     ${util_src_dir}/napi_util.cpp
 )
+```
+
+## 有关 napi 返回值问题
+napi函数如果声明了返回值：napi_value，则必须有 return 语句，否则程序无法正常运行。
+```ts
+函数类型：
+export const n: (filePath: string, pkgName: string, firstTime: number, p: (cmd: number, body: string) => void) => void;
+
+具体实现：
+napi_value entry_qimei::n(napi_env env, napi_callback_info info) {
+    init(env, info);
+    return nullptr;
+}
 ```
